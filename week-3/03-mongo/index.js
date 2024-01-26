@@ -1,27 +1,32 @@
-const mongoose = require('mongoose');
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const adminRouter = require("./routes/admin.js");
+const userRouter = require("./routes/user.js");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
-// Connect to MongoDB
-mongoose.connect('your-mongodb-url');
+// Middleware for parsing request bodies
+dotenv.config();
+app.use(bodyParser.json());
+app.use("/admin", adminRouter);
+app.use("/user", userRouter);
 
-// Define schemas
-const AdminSchema = new mongoose.Schema({
-    // Schema definition here
-});
+const PORT = 3000;
 
-const UserSchema = new mongoose.Schema({
-    // Schema definition here
-});
-
-const CourseSchema = new mongoose.Schema({
-    // Schema definition here
-});
-
-const Admin = mongoose.model('Admin', AdminSchema);
-const User = mongoose.model('User', UserSchema);
-const Course = mongoose.model('Course', CourseSchema);
-
-module.exports = {
-    Admin,
-    User,
-    Course
+try {
+  mongoose
+    .connect(
+      `mongodb+srv://vadityaraj67:${process.env.PASS}@cluster0.yvftnur.mongodb.net/mongoPractice`
+    )
+    .then(() => {
+      console.log("db connected");
+    })
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    });
+} catch (error) {
+  console.error("Error occurred in connecting:", error);
 }
