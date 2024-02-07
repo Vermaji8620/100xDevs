@@ -10,7 +10,16 @@ const mongoose = require("mongoose");
 dotenv.config();
 app.use(bodyParser.json());
 app.use("/admin", adminRouter);
-app.use("/user", userRouter);
+app.use("/users", userRouter);
+
+app.get("/", (req, res) => {
+  res.send("this is the default port that is running");
+});
+
+app.use((err, req, res, next) => {
+  console.log("landed here in global catch");
+  res.status(500).send(err.message);
+});
 
 const PORT = 3000;
 
