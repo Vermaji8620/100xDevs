@@ -7,7 +7,7 @@ const Compo = ({ title, description }) => {
         {title}
         <hr />
         {description}
-        <br />
+        <hr />
         <br />
       </div>
     </div>
@@ -18,5 +18,4 @@ Compo.propTypes = {
   title: PropTypes.any.isRequired,
   description: PropTypes.any.isRequired,
 };
-
 export default Compo;

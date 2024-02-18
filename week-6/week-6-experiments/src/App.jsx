@@ -1,59 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Compo from "./components/Compo";
 
 const App = () => {
-  const [arr, setArr] = useState([
-    {
-      title: "first title",
-      description: "first description",
-    },
-    {
-      title: "second title",
-      description: "second description",
-    },
-    {
-      title: "third title",
-      description: "third description",
-    },
-  ]);
+  // const [arr, setArr] = useState([
+  //   {
+  //     title: "first title",
+  //     description: "first description",
+  //   },
+  //   {
+  //     title: "second title",
+  //     description: "second description",
+  //   },
+  //   {
+  //     title: "third title",
+  //     description: "third description",
+  //   },
+  // ]);
 
-  const [title, settitle] = useState("aaaaaaa");
-  const [description, setDescription] = useState("ddddddddddd");
+  // const [title, settitle] = useState("aaaaaaa");
+  // const [description, setDescription] = useState("ddddddddddd");
 
-  const addtodo = () => {
-    setArr([...arr, { title, description }]);
-  };
+  // const addtodo = () => {
+  //   setArr([...arr, { title, description }]);
+  // };
+
+  const [res, setRes] = useState([]);
+  useEffect(() => {
+    setInterval(() => {
+      fetch("https://sum-server.100xdevs.com/todos")
+        .then(async (data) => {
+          const store = await data.json();
+          setRes(store.todos);
+        })
+        .catch((err) => {
+          console.log("some error occured", err);
+        });
+    }, 3000);
+  }, []);
 
   return (
     <div>
-      below is the rendering
-      <br />
-      <input
-        type="text"
-        name="title"
-        value={title}
-        onChange={(e) => {
-          settitle(e.target.value);
-        }}
-      />
-      <br />
-      <input
-        type="text"
-        name="description"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <button onClick={addtodo} style={{ cursor: "pointer" }}>
-        Click
-      </button>
-      <br />
-      <br />
-      <br />
-      {arr.map((eacharr, index) => (
+      <h1>Below is the thing</h1>
+      {res.map((todo, index) => (
         <div key={index}>
-          <Compo title={eacharr.title} description={eacharr.description} />
+          <Compo title={todo.title} description={todo.description} />
         </div>
       ))}
     </div>
