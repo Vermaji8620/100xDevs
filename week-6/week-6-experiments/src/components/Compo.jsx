@@ -1,11 +1,22 @@
 import PropTypes from "prop-types";
 
-const Compo = ({ game }) => {
-  return <div>{game}</div>;
+const Compo = ({ title, description }) => {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div>
+        {title}
+        <hr />
+        {description}
+        <br />
+        <br />
+      </div>
+    </div>
+  );
 };
 
 Compo.propTypes = {
-  game: PropTypes.any.isRequired,
+  title: PropTypes.any.isRequired,
+  description: PropTypes.any.isRequired,
 };
 
 export default Compo;
