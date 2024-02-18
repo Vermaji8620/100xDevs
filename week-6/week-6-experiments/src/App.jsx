@@ -2,11 +2,22 @@ import "./App.css";
 import Compo from "./components/Compo";
 import { useState } from "react";
 
-function App() {
+export default function App() {
+  return (
+    <div style={{ padding: "10px" }}>
+      <NewApp />
+      <Compo game="thissss" />
+      <Compo game="pppppppp" />
+      <Compo game="zzzzz" />
+    </div>
+  );
+}
+
+export function NewApp() {
   const [prop, setProp] = useState("football");
   return (
-    <>
-      I am going to play the game{" "}
+    <div style={{ color: "white" }}>
+      I am going to play
       <button
         style={{ fontSize: "20px", cursor: "pointer" }}
         onClick={() => {
@@ -16,7 +27,6 @@ function App() {
         Click me
       </button>
       <Compo game={prop} />
-    </>
+    </div>
   );
 }
-export default App;
