@@ -4,17 +4,15 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 const Exp = ({ id }) => {
-  // component code here
-
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState({});
+  console.log(loading);
   useEffect(() => {
     //   setInterval(() => {
     (async () => {
-      const data = await fetch(
-        `https://sum-server.100xdevs.com/todos?id=${id}`
-      );
+      const data = await fetch(`https://sum-server.100xdevs.com/todo?id=${id}`);
       let res = await data.json();
-      res = res.todos;
+      res = res.todo;
+      console.log(res);
       setLoading(res);
     })();
     //   }, 3000);
@@ -23,7 +21,7 @@ const Exp = ({ id }) => {
   return (
     <div>
       {/* <button onClick={func}>click me</button> */}
-      {loading &&
+      {/* {loading &&
         loading.map((item, index) => (
           <div key={index}>
             {
@@ -34,13 +32,49 @@ const Exp = ({ id }) => {
               </div>
             }
           </div>
-        ))}
+        ))} */}
+      {loading.title} <br /> {loading.description}
+    </div>
+  );
+};
+
+const Render = () => {
+  const [val, setVal] = useState("1");
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginBottom: "50px",
+          marginTop: "30px",
+        }}
+      >
+        <button value={1} onClick={(e) => setVal(e.target.value)}>
+          button 1
+        </button>
+        <button value={2} onClick={(e) => setVal(e.target.value)}>
+          button 2
+        </button>
+        <button
+          value={3}
+          onClick={(e) => {
+            setVal(e.target.value);
+          }}
+        >
+          button 3
+        </button>
+        <button value={4} onClick={(e) => setVal(e.target.value)}>
+          button 4
+        </button>
+      </div>
+      <Exp id={val} />
     </div>
   );
 };
 
 const App = () => {
-  return <Exp id="4" />;
+  return <Render />;
 };
 
 Exp.propTypes = {
