@@ -1,20 +1,24 @@
 import "../src/App.css";
 import { useEffect, useState } from "react";
 
-const App = () => {
-  const [loading, setLoading] = useState([]);
-  // console.log(loading);
+import PropTypes from "prop-types";
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     (async () => {
-  //       const data = await fetch("https://sum-server.100xdevs.com/todos");
-  //       let res = await data.json();
-  //       res = res.todos;
-  //       setLoading(res);
-  //     })();
-  //   }, 3000);
-  // }, []);
+const Exp = ({ id }) => {
+  // component code here
+
+  const [loading, setLoading] = useState([]);
+  useEffect(() => {
+    //   setInterval(() => {
+    (async () => {
+      const data = await fetch(
+        `https://sum-server.100xdevs.com/todos?id=${id}`
+      );
+      let res = await data.json();
+      res = res.todos;
+      setLoading(res);
+    })();
+    //   }, 3000);
+  }, [id]);
 
   return (
     <div>
@@ -33,6 +37,14 @@ const App = () => {
         ))}
     </div>
   );
+};
+
+const App = () => {
+  return <Exp id="4" />;
+};
+
+Exp.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default App;
