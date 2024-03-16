@@ -1,18 +1,35 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useContext, useState } from "react";
+import { CountContext } from "./Context";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
   return (
     <div>
-      <Count count={count} />
-      <Buttons count={count} setCount={setCount} />
+      <CountContext.Provider value={{ count, setCount }}>
+        <Count />
+      </CountContext.Provider>
     </div>
   );
 }
 
-const Buttons = ({ count, setCount }) => {
+function Count() {
+  const { setCount } = useContext(CountContext);
+  return (
+    <div>
+      <CountRenderer />
+      <Buttons setCount={setCount} />
+    </div>
+  );
+}
+
+const CountRenderer = () => {
+  const { count } = useContext(CountContext);
+  return <div>{count}</div>;
+};
+
+const Buttons = () => {
+  const { count, setCount } = useContext(CountContext);
   return (
     <div>
       <button
@@ -31,19 +48,6 @@ const Buttons = ({ count, setCount }) => {
       </button>
     </div>
   );
-};
-
-function Count({ count }) {
-  return <div>{count}</div>;
-}
-
-Count.propTypes = {
-  count: PropTypes.number.isRequired,
-};
-
-Buttons.propTypes = {
-  count: PropTypes.number.isRequired,
-  setCount: PropTypes.number.isRequired,
 };
 
 export default App;
