@@ -7,20 +7,28 @@ function App() {
   return (
     <div>
       <Count count={count} />
-      <Buttons />
+      <Buttons count={count} setCount={setCount} />
     </div>
   );
 }
 
-const Buttons = () => {
+const Buttons = ({ count, setCount }) => {
   return (
     <div>
-      <button onClick={()=>{
-
-      }}>Increase</button>
-      <button onClick={()=>{
-
-      }}>Decrease</button>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        Increase
+      </button>
+      <button
+        onClick={() => {
+          setCount(count - 1);
+        }}
+      >
+        Decrease
+      </button>
     </div>
   );
 };
@@ -31,6 +39,11 @@ function Count({ count }) {
 
 Count.propTypes = {
   count: PropTypes.number.isRequired,
+};
+
+Buttons.propTypes = {
+  count: PropTypes.number.isRequired,
+  setCount: PropTypes.number.isRequired,
 };
 
 export default App;
