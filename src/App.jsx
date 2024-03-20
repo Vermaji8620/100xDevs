@@ -1,58 +1,55 @@
-import { useContext, useMemo, useState } from "react"
-import { CountContext } from "./context";
-import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { countAtom, evenSelector } from "./store/atoms/count";
+import {
+  RecoilRoot,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
+import { countAtom } from "./store/atoms/count";
 
-function App() {
+const App = () => {
+  return (
+    <RecoilRoot>
+      <Count />
+    </RecoilRoot>
+  );
+};
+
+const Count = () => {
   return (
     <div>
-      <RecoilRoot>
-        <Count />
-      </RecoilRoot>
+      {console.log("done")}
+      <CountRenderer />
+      <Buttons />
+      <Show />
     </div>
-  )
-}
+  );
+};
 
-function Count() {
-  console.log("re-render");
-  return <div>
-    <CountRenderer />
-    <Buttons />
-  </div>
-}
-
-function CountRenderer() {
+const CountRenderer = () => {
   const count = useRecoilValue(countAtom);
-  
-  return <div>
-    <b>
-      {count}
-    </b>
-    <EvenCountRenderer />
-  </div>
-}
+  return (
+    <div>
+      <b>{count} </b>
+    </div>
+  );
+};
 
-function EvenCountRenderer() {
-  const isEven = useRecoilValue(evenSelector);
-
-  return <div>
-    {isEven ? "It is even" : null}
-  </div>
-}
-
-function Buttons() {
+const Buttons = () => {
+  // const [count, setCount] = useRecoilState(countAtom);
   const setCount = useSetRecoilState(countAtom);
-  console.log("buttons re-rendererd");
+  console.log("re-rendered");
+  return (
+    <div>
+      <button onClick={() => setCount((count) => count + 1)}>Increase </button>
+      <button onClick={() => setCount((count) => count - 1)}>Decrease </button>
+    </div>
+  );
+};
 
-  return <div>
-    <button onClick={() => {
-      setCount(count => count + 1)
-    }}>Increase</button>
+const Show = () => {
+  const count = useRecoilValue(countAtom);
+  return <div>{count % 2 == 0 && <div>It is even</div>}</div>;
+};
 
-    <button onClick={() => {
-      setCount(count => count - 1)
-    }}>Decrease</button>
-  </div>
-}
-
-export default App
+export default App;
+  
