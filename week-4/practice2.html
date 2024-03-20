@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="title" placeholder="enter name" /><br />
+    <input
+      type="text"
+      name=""
+      id="description"
+      placeholder="enter description"
+    /><br />
+    <button onclick="ontodo()">Add todo</button><br />
+    <div class="render"></div>
+    <script>
+      const ontodo = () => {
+        const title = document.getElementById("title").value;
+        const desc = document.getElementById("description").value;
+        const outerdiv = document.createElement("div");
+        outerdiv.innerHTML += title;
+        outerdiv.innerHTML += desc;
+        document.getElementsByClassName("render")[0].appendChild(outerdiv);
+      };
+    </script>
+  </body>
+</html>

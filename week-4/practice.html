@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      name=""
+      oninput="delay()"
+      placeholder="enter first num"
+      value="8"
+      id="firstnum"
+    />
+    <input
+      type="text"
+      oninput="delay()"
+      name=""
+      placeholder="enter second num"
+      value="9"
+      id="secondnum"
+    />
+    <div id="finalsum"></div>
+    <script>
+      // here the call is basically delayed so that call() function gets called after 100ms,
+      //   but even there needs to be some logic written, so that if before the ending of the 100ms, there is some input again, then those 100ms will be extended again---
+      //   so the logic for that would be to clear the time interval if something is input within 100ms. (cancel the existing clock and start the new clock)
+      let timeOut;
+      const delay = () => {
+        // think this to be in the way that timeOut enters the waiting section and then it needs to wait for 100ms before calling the call() function, and then the call() function gets called. BUt , if the user again inputs something that is within 100ms, then the original timeOut that was initially waiting, needs to be cleared, and then new timeOut will get inside the waiting section again, and then this cycle continues.
+        // whenever anything as such needs to happen where time is invloved, think about the call stack, web api's and the callback queue and then imagine everything from there.
+        clearTimeout(timeOut);
+        timeOut = setTimeout(() => {
+          call();
+        }, 100);
+      };
+      const call = async () => {
+        let first = parseInt(document.getElementById("firstnum").value);
+        let second = parseInt(document.getElementById("secondnum").value);
+        const res = await fetch(
+          `https://sum-server.100xdevs.com/sum?a=${first}&b=${second}`
+        );
+        const data = await res.json();
+        console.log(data);
+      };
+    </script>
+  </body>
+</html>
