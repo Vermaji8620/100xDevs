@@ -1,3 +1,5 @@
+// atom is for initialising a value and then the selector is for the function, so here when i need to initialise the atom with the value that needs to come from the server, so I need to use selector
+
 import axios from "axios";
 import { atom, selector } from "recoil";
 
