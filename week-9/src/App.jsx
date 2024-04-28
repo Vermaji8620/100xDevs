@@ -1,25 +1,34 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const useInterval = () => {
-  const [timer, setTimer] = useState(0);
-
+const useDebounce = (value) => {
   useEffect(() => {
-    const iner = setInterval(() => {
-      setTimer((timer) => timer + 1);
-    }, 1000);
-    return () => {
-      clearInterval(iner);
-    };
-  }, [timer]);
+    const val = setTimeout(() => {
+      // console.log("changed");
+      // fetch("");
+    }, 500);
 
-  return timer;
+    return () => {
+      clearTimeout(val);
+    };
+  }, [value]);
 };
 
 const App = () => {
-  const timer = useInterval();
+  const [value, setValue] = useState("");
 
-  return <div>Timer is at {timer}</div>;
+  useDebounce(value);
+
+  return (
+    <div>
+      <input
+        type="text"
+        name="text"
+        id="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
+  );
 };
 
 export default App;
