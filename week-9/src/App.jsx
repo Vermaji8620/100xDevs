@@ -1,32 +1,58 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import "./App.css";
 
-function App() {
-  const [disp, setDisp] = useState(true);
+const useTodos = (n) => {
+  const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  console.log(todos);
 
   useEffect(() => {
     setInterval(() => {
-      setDisp(!disp);
-    }, 3000);
-  }, [disp]);
+      axios.get("https://sum-server.100xdevs.com/todos").then((res) => {
+        setTodos(res.data.todos);
+        setLoading(false);
+      });
+    }, n * 1000);
 
-  return <>{disp && <MyComponent />}</>;
-}
-
-function MyComponent() {
-  useEffect(() => {
-    // Perform setup or data fetching here
-
-    
-
-    return () => {
-      // Cleanup code (similar to componentWillUnmount)
-
-      
-    };
+    axios.get("https://sum-server.100xdevs.com/todos").then((res) => {
+      setTodos(res.data.todos);
+      setLoading(false);
+    });
   }, []);
 
-  // Render UIr
-  return <div>fdffsd</div>;
-}
+  return { todos, loading };
+};
+
+const App = () => {
+  const { todos, loading } = useTodos(3);
+  return (
+    <div>
+      {loading ? (
+        <div>loading...</div>
+      ) : (
+        todos.map((todo, index) => (
+          <div key={index}>
+            <Track todo={todo} />
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
+
+import PropTypes from "prop-types";
+
+const Track = ({ todo }) => {
+  return (
+    <div>
+      {todo.title}
+      {todo.description}
+    </div>
+  );
+};
+
+Track.propTypes = {
+  todo: PropTypes.object.isRequired,
+};
+
 export default App;
