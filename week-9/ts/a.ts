@@ -1,5 +1,5 @@
-const greet = (firstname: any, lastname: string) => {
-    console.log("hello " + firstname + lastname)
+const greet = (a: number, b: number) => {
+    return ("dsfsdf" + a + b);
 }
 
-greet(7, "ags")
+console.log(greet(7, 10))
