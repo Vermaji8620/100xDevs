@@ -1,22 +1,24 @@
-interface User {
-    firstName: string,
-    lastName: string,
-    // optional thing
-    email?: string,
+interface Person {
+    name: string,
     age: number,
+    greet(phrase: string): void
 }
 
-const user = {
-    firstName: "aditya",
-    lastName: "verma",
-    email: "aditya@gmail.com",
-    age: 22
+class Employee implements Person {
+
+    name: string;
+    age: number;
+
+    constructor(n: string, a: number) {
+        this.name = n
+        this.age = a
+    }
+
+    greet(phrase: string): void {
+        console.log("KJDHFJISDHNFIJUSDHFSUDE")
+    }
+
 }
 
-const isLegal = (userr: User) => {
-
-    console.log(userr.age > 18 ? 'fine age' : 'underage')
-
-}
-
-isLegal(user)
+const ppp = new Employee("dfjdshf", 565)
+console.log(ppp)
