@@ -51,14 +51,65 @@
 // }
 // console.log(maxValue([1, 2, 3]));
 
-type allarray = {
-    name: string, class: string, age: number
+// type allarray = {
+//     name: string, class: string, age: number
+// }
+
+// const filterfunc = (arrinput: allarray[]) => {
+
+//     return arrinput.filter(each => each.age >= 16)
+
+// }
+
+// console.log(filterfunc([{ name: 'asdasda', class: 'afaas', age: 12 }, { name: 'SEEE', class: 'SSSSSSS', age: 15 }, { name: 'XXX', class: 'XXXXXX', age: 17 }, { name: 'ZZZZ', class: 'ZZZZZZZZ', age: 16 }]))
+
+
+// enums 
+
+// type emun = 'up' | 'down' | 'left' | 'right'
+// const func = (keyPressed: emun) => {
+//     if (keyPressed == 'up') {
+//         console.log(keyPressed,)
+//     }
+// }
+
+// func("up")
+// func("down")
+// func("left")
+// // wrong
+// // func("rigdht")
+// // correct
+// func("right")
+
+
+// generics
+// type Input = string
+// the above code works fine but the below code does not (bcoz TS does not actually identify by itself after returning that whether its a string or a number , so toUPercase() does jot work for below syntax)
+// type Input = string | number
+// const firstEl = (arr: Input[]) => {
+//     return arr[0];
+// }
+
+// console.log(firstEl(['asas', 'jhfuj']).toUpperCase()) 
+
+
+// const takefunc = <T>(arg: T) => {
+//     return arg
+// }
+
+// let ut1 = takefunc<string>("ajhfehgfuyie")
+// let ut2 = takefunc<number>(24)
+// console.log(ut1)
+// console.log(ut2)
+
+function getElem<T>(arr: T[]) {
+    return arr[0];
 }
 
-const filterfunc = (arrinput: allarray[]) => {
-
-    return arrinput.filter(each => each.age >= 16)
-
+interface User {
+    name: string
 }
 
-console.log(filterfunc([{ name: 'asdasda', class: 'afaas', age: 12 }, { name: 'SEEE', class: 'SSSSSSS', age: 15 }, { name: 'XXX', class: 'XXXXXX', age: 17 }, { name: 'ZZZZ', class: 'ZZZZZZZZ', age: 16 }]))
+const el = getElem<User>([{ name: "djhfbhjdasfb" }])
+const el2 = getElem([1, 2])
+const el3 = getElem([true, false])
