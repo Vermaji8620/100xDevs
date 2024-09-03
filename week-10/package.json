@@ -1,5 +1,5 @@
 {
-  "name": "ts",
+  "name": "week-10",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/pg": "^8.11.8",
+    "pg": "^8.12.0"
+  }
 }
