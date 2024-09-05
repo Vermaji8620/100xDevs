@@ -44,15 +44,15 @@ const deleteUser = async (arfg: string) => {
     })
 }
 
-deleteUser('rajsecond')
+// deleteUser('rajsecond')
 
 // updateTheUser()
 
 // getUser('verma@verma.verma');
 
-// insertUser("verma@verma.verma", "verma", "vermafist", "vermasecond").then(async () => {
-//     console.log("done")
-// }).catch(async () => {
-//     console.log("not done")
-// })
+insertUser("verma@verma.verma", "verma", "vermafist", "vermasecond").then(async () => {
+    console.log("done")
+}).catch(async () => {
+    console.log("not done")
+})
 
