@@ -90,3 +90,30 @@ const getUserPost = async (userId: number) => {
 // getUserPost(5)
 
 
+const updateTodo = async (userId: number, postId: number) => {
+    await prisma.todo.update({
+        where: {
+            authorId: userId,
+            id: postId
+        },
+        data: {
+            title: "first verma title changed",
+            description: "first verma desc changed"
+        }
+    })
+}
+
+// updateTodo(5, 8)
+
+const deleteTodo = async (userId: number, postId: number) => {
+
+    await prisma.todo.delete({
+        where: {
+            authorId: userId,
+            id: postId
+        }
+    })
+
+}
+
+// deleteTodo(8, 7); 
