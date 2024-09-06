@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
 
+// ----------------------- user  ---------------------------------
+
 const insertUser = async (userName: string, password: string, firstName: string, lastName: string) => {
     const nrew = await prisma.user.create({
         data: {
@@ -9,7 +11,14 @@ const insertUser = async (userName: string, password: string, firstName: string,
         }
     })
     console.log(nrew)
+    return nrew;
 }
+
+// insertUser("raj@raj.raj", "raj", "rajfist", "rajsecond").then(async () => {
+//     console.log("done")
+// }).catch(async () => {
+//     console.log("not done")
+// })
 
 const getUser = async (argpassed: string) => {
     const allUser = await prisma.user.findUnique(
@@ -21,6 +30,8 @@ const getUser = async (argpassed: string) => {
     )
     console.log(allUser)
 }
+
+// getUser('verma@verma.verma');
 
 const updateTheUser = async () => {
     await prisma.user.update({
@@ -36,6 +47,9 @@ const updateTheUser = async () => {
     })
 }
 
+// updateTheUser()
+
+
 const deleteUser = async (arfg: string) => {
     await prisma.user.deleteMany({
         where: {
@@ -46,13 +60,33 @@ const deleteUser = async (arfg: string) => {
 
 // deleteUser('rajsecond')
 
-// updateTheUser()
+// ------------------------------- post -----------------------------
 
-// getUser('verma@verma.verma');
+const createPost = async (idGot: number) => {
+    await prisma.todo.create({
+        data: {
+            title: "this is second aditya title",
+            description: "this is second aditya description",
+            done: false,
+            authorId: idGot,
+        }
+    })
+}
 
-insertUser("verma@verma.verma", "verma", "vermafist", "vermasecond").then(async () => {
-    console.log("done")
-}).catch(async () => {
-    console.log("not done")
-})
+// createPost(4)
+
+const getUserPost = async (userId: number) => {
+
+    const findTodos = await prisma.todo.findMany({
+        where: {
+            authorId: userId
+        },
+    })
+
+    console.log(findTodos);
+
+}
+
+// getUserPost(5)
+
 
