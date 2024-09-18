@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "week-12": "file:"
+    "@types/express": "^4.17.21",
+    "express": "^4.21.0",
+    "week-12": "file:",
+    "zod": "^3.23.8"
   }
 }
